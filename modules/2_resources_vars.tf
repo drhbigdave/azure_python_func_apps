@@ -15,10 +15,12 @@ variable "sa1_environment_tag" {}
 # functions
 variable "consumption_linux_plan" {}
 variable "consumption_linux_plan_kind" {}
+variable "consumption_linux_function_version" {}
 variable "consumption_linux_plan_sku_tier" {}
 variable "consumption_linux_plan_sku_size" {}
 variable "consumption_linux_function_name" {}
 variable "consumption_linux_function_os_type" {}
+variable "functionapp" {}
 
 #scratch
 /*

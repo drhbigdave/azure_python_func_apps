@@ -1,3 +1,32 @@
+/*
+data "azurerm_storage_account_sas" "sas" {
+    connection_string = azurerm_storage_account.sa1.primary_access_key
+    https_only = true
+    start = "2019-01-01"
+    expiry = "2021-12-31"
+    resource_types {
+        object = true
+        container = false
+        service = false
+    }
+    services {
+        blob = true
+        queue = false
+        table = false
+        file = false
+    }
+    permissions {
+        read = true
+        write = false
+        delete = false
+        list = false
+        add = false
+        create = false
+        update = false
+        process = false
+    }
+}
+*/
 resource "azurerm_app_service_plan" "consumption_linux_plan" {
   name                = var.consumption_linux_plan
   location            = azurerm_resource_group.rg1.location
@@ -19,11 +48,26 @@ resource "azurerm_function_app" "consumption_linux_function" {
   storage_account_name       = azurerm_storage_account.sa1.name
   storage_account_access_key = azurerm_storage_account.sa1.primary_access_key
   os_type                    = var.consumption_linux_function_os_type
+  version = var.consumption_linux_function_version
+  site_config {
+    linux_fx_version = "PYTHON|3.8"
+    use_32_bit_worker_process = false
+  }
+
   identity {
     type = "UserAssigned"
     identity_ids = [
       data.azurerm_user_assigned_identity.read_write.id
     ]
+  }
+  app_settings = {
+    saConnectionStr = ""
+    blob_sa_name = "drhfunctiontesting"
+    srcContainerNameValue = "source"
+    srcPrefixNameValue = "transfer"
+    dstContainerNameValue = "destination"
+    FUNCTIONS_WORKER_RUNTIME = "python"
+    #HASH = "${base64encode(filesha256("${var.functionapp}"))}" TODO create zip and place in ./build folder
   }
 }
 

@@ -16,11 +16,15 @@ module "linux_funcs" {
 
   # functions
   consumption_linux_plan = "linux_func_plan1"
-  consumption_linux_plan_kind = "Linux"
+  consumption_linux_plan_kind = "functionapp"
+  consumption_linux_function_version = "~3"
   consumption_linux_plan_sku_tier = "Dynamic"
   consumption_linux_plan_sku_size = "Y1"
   consumption_linux_function_name = "drhBlobCopyTf1"
   consumption_linux_function_os_type = "linux"
+  #functionapp = "../builds/drhBlobCopyTf1.zip"
+
+
   #rg_vnet1_name                 = "vm_infra"
   #rg_vnet1_location             = "East US"
   #vnet1_name                    = "study_vm_infrastructure"

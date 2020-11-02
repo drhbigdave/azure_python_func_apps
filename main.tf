@@ -1,3 +1,3 @@
-module "ps_integrate_data" {
+module "azure_python_func_apps" {
   source = "./environments/"
 }
