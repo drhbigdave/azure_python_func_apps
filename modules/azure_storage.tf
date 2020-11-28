@@ -15,7 +15,8 @@ resource "azurerm_storage_account_network_rules" "sa2_rules" {
 
   default_action             = "Deny"
   ip_rules                   = [data.azurerm_key_vault_secret.davids_home_ip.value, data.azurerm_key_vault_secret.shanikas_home_ip.value]
-  virtual_network_subnet_ids = [data.azurerm_subnet.vm_subnet.id]
+  virtual_network_subnet_ids = [data.azurerm_subnet.vm_subnet.id,
+                                azurerm_subnet.subnet1.id]
   bypass                     = ["AzureServices"]
 }
 
@@ -49,6 +50,6 @@ resource "azurerm_storage_account_network_rules" "sa1_rules" {
 
   default_action             = "Deny"
   ip_rules                   = [data.azurerm_key_vault_secret.davids_home_ip.value, data.azurerm_key_vault_secret.shanikas_home_ip.value]
-  virtual_network_subnet_ids = [data.azurerm_subnet.vm_subnet.id]
+  virtual_network_subnet_ids = [azurerm_subnet.subnet1.id, data.azurerm_subnet.vm_subnet.id]
   bypass                     = ["AzureServices"]
 }

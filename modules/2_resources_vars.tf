@@ -13,6 +13,16 @@ variable "container2_name" {}
 variable "sa1_environment_tag" {}
 
 # functions
+variable "consumption_plan_count" {}
+variable "consumption_linux_functions" {
+    type = list(string)
+}
+variable "consumption_linux_function_values" {
+    type = map(object({
+        name = string
+    }))
+}
+variable "function_app_count" {}
 variable "consumption_linux_plan" {}
 variable "consumption_linux_plan_kind" {}
 variable "consumption_linux_function_version" {}
@@ -20,8 +30,15 @@ variable "consumption_linux_plan_sku_tier" {}
 variable "consumption_linux_plan_sku_size" {}
 variable "consumption_linux_function_name" {}
 variable "consumption_linux_function_os_type" {}
-variable "functionapp" {}
+#variable "functionapp" {}
 
+# network
+variable "subnet1_name" {}
+variable "vnet_rg_name" {}
+variable "vnet_name" {}
+variable "subnet1_address_prefixes" {}
+variable "subnet1_service_endpoints" {}
+variable "nsg1_name" {}
 #scratch
 /*
 variable "app_service_plan_name" {}
